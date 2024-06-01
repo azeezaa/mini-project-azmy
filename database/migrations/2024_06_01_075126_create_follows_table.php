@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('following_id');
+            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('follower_id');
+            $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+            
+            // biar user gak bisa follow orang yang sama  lebih dari satu kali
+            $table->unique(['following_id', 'follower_id']);
         });
     }
 

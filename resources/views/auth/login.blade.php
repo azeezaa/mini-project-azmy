@@ -6,7 +6,7 @@
     <div class="mx-lg-5 mt-lg-5 mb-lg-3">        
         <div class="grid mx-3 mt-4">
             <div class="row row-gap-4 justify-content-center">
-                <div class="card bg-dark w-75" style="height: auto; padding: 20px;">
+                <div class="card bg-transparent w-75" style="height: auto; padding: 20px;">
                     <h3 class="fw-bold text-white text-center">Login</h3>
                     <div class="row align-items-start">
                         <div class="col-4 d-flex justify-content-center align-items-center">

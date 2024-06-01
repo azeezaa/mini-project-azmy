@@ -17,7 +17,6 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        // Validasi input
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
@@ -44,7 +43,6 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'username' => 'required|string|max:255|unique:users',
             'fullname' => 'required|string|max:255',
@@ -52,7 +50,6 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Proses registrasi pengguna baru
         User::create([
             'username' => $request->username,
             'fullname' => $request->fullname,

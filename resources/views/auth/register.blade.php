@@ -3,15 +3,15 @@
 
 @section('content')
     <div class="container" style="height: 100px"></div>
-    <div class="mx-lg-5 mt-lg-5 mb-lg-3">        
-        <div class="grid mx-3 mt-4">
+    <div class="mx-lg-5  mb-lg-3">        
+        <div class="grid mx-3">
             <div class="row row-gap-4 justify-content-center">
-                <div class="card bg-dark w-75" style="height: auto; padding: 20px;">
+                <div class="card bg-transparent w-75" style="height: auto; padding: 20px;">
                     <h3 class="fw-bold text-white text-center">Register</h3>
                     <div class="row align-items-start">
                         <div class="col-4 d-flex justify-content-center align-items-center">
                             <div>
-                                <img style="height:200px;" src="{{ asset('assets/logo-medsos.png') }}" alt="Logo Medsos">
+                                <img style="height:200px; margin-top:80px;" src="{{ asset('assets/logo-medsos.png') }}" alt="Logo Medsos">
                             </div>
                         </div>
 

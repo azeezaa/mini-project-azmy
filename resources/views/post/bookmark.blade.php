@@ -7,8 +7,7 @@
     @extends('layouts.sidebar')
 
     <div class="col" style="margin-left: 300px;">
-        {{-- Fixed header in the right section --}}
-        <div class="bg-primary m-1 sticky-top">
+        <div class="bg-black m-1 sticky-top">
             <div class="container-fluid">
                 <div class="d-flex justify-content-center">
                     <img style="height:50px;" src="{{ asset('assets/logo-medsos.png') }}" alt="Logo Medsos">
@@ -20,24 +19,31 @@
             </div>
         </div>
         
-        {{-- Main content area --}}
         <div>
-            <div class="row m-1 bg-success gap-1 p-4" style="overflow-y: auto;">
+            <div class="row m-1 gap-1 p-4" style="overflow-y: auto;">
                 <h4>All Bookmarks</h4>
-                @for ($i = 0; $i < 9; $i++)
-                <div class="col-md-2 m-1 row border bg-black rounded">
-                    <div class="d-flex align-items-center py-2">
-                        <img src="https://via.placeholder.com/150" alt="User Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
-                        <div class="flex-grow-1">
-                            <div class="fw-bold text-sm">Username</div>
-                            <div class="text-light text-sm">Waktu</div>
+                @foreach($bookmarkedPosts as $post)
+                    <div class="border col-md-3 p-4 bg-black rounded mb-3">
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center">
+                                @if($post->user)
+                                    <img src="{{ $post->post->user->profile_image ? asset($post->post->user->profile_image) : asset('path/to/default/image') }}" alt="User Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold mb-1">{{ $post->post->user->username }}</div>
+                                        <div class="text-light">{{ $post->post->created_at->diffForHumans() }}</div>
+                                    </div>
+                                @else
+                                    <div class="text-danger">User not found</div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="shadow-sm">
+                            <a href="{{ route('seePost', $post->id) }}">
+                                <img src="{{ asset('storage/' . $post->post->image) }}" class="card-img-top rounded" alt="Post Image" style="max-height: 200px;">
+                            </a>
                         </div>
                     </div>
-                    <div class="position-relative" style="padding-bottom: 100%; height: 0; overflow: hidden;">
-                        <img src="https://via.placeholder.com/400x400" class="card-img-top rounded position-absolute m-auto" alt="Post Image" style="width: 90%; height: 90%; object-fit: cover;">
-                    </div>
-                </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

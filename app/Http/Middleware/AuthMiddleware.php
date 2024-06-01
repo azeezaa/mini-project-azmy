@@ -4,15 +4,21 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
-class RedirectIfAuthenticated
+class AuthMiddleware
 {
-    public function handle(Request $request, Closure $next): Response
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must login first');
+        // Perform authentication logic here
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
 
         return $next($request);

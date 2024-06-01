@@ -1,14 +1,13 @@
 @extends('layouts.master')
+
 @section('title', 'Posting')
 
 @section('content')
-
 <div class="d-flex">
-    @extends('layouts.sidebar')
+    @include('layouts.sidebar')
 
     <div class="col" style="margin-left: 300px;">
-        {{-- Fixed header in the right section --}}
-        <div class="bg-primary m-1 sticky-top">
+        <div class="m-1 bg-black sticky-top">
             <div class="container-fluid">
                 <div class="d-flex justify-content-center">
                     <img style="height:50px;" src="{{ asset('assets/logo-medsos.png') }}" alt="Logo Medsos">
@@ -20,23 +19,20 @@
             </div>
         </div>
         
-        {{-- Main content area --}}
         <div>
-            <div class="col m-1 bg-success" style="height: 100vh; overflow-y: auto;">
+            <div class="col m-1 mt-3" style="height: 100vh; overflow-y: auto;">
                 <div class="col-md-4 mx-auto border p-4 bg-black rounded mb-3">
-                    <form action="{{ route('formPost') }}" method="post">
+                    <form action="{{ route('storePost') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-4">
-                            <div class="d-flex align-items-center">
-                                <img src="https://via.placeholder.com/150" alt="User Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                                <div class="flex-grow-1">
-                                    <div class="fw-bold mb-1">Username</div>
-                                    <div class="text-light">Waktu</div>
-                                </div>
-                                <i class="fa-regular fa-bookmark fa-lg"></i>
+                            <div class="d-flex align-items-center justify-content-between">
+                                    <img src="{{ asset(Auth::user()->profile_image) }}" alt="User Avatar" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <div class="fw-bold mb-1">{{ Auth::user()->username }}</div>
+                                <i class="fa-solid fa-ellipsis fa-lg"></i>
                             </div>
-                            {{-- Tambah postingan --}}
-                            <div class="mb-3">
-                                <textarea class="form-control" placeholder="Write a caption..." name="caption" id="caption" rows="3"></textarea>
+                            
+                            <div class="my-3">
+                                <input type="text" class="form-control bg-transparent text-white border-0 border-bottom rounded-0 border-secondary px-0" placeholder="Deskripsi Postingan" name="caption" id="caption" rows="3"></input>
                             </div>
                             <div class="mb-3 position-relative">
                                 <input type="file" class="form-control d-none" id="image" name="image" accept="image/*">
@@ -47,15 +43,15 @@
                             </div>
                             <hr>
                             <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-sm btn-info fw-bold" style="color: #fff;">Posting</button>
-                                    </div>
+                                <button type="submit" class="btn btn-sm btn-info fw-bold black">Posting</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 @endsection
 
 @section('scripts')
